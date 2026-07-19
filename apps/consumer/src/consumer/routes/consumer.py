@@ -3,7 +3,7 @@
 from fastapi import APIRouter
 
 from consumer.controllers import consumer as consumer_controller
-from consumer.controllers.consumer import ConsumerIdPath, ConsumerResponse
+from pylib.models.consumer.consumer import ConsumerIdPath, ConsumerResponse
 
 router = APIRouter(prefix="/consumer", tags=["consumer"])
 

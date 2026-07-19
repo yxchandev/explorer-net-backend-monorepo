@@ -1,18 +1,7 @@
-"""Consumer controllers with Pydantic request/response models."""
+"""Consumer profile controllers."""
 
-from pydantic import BaseModel, Field
-
+from pylib.models.consumer.consumer import ConsumerIdPath, ConsumerResponse
 from pylib.services import consumer as consumer_service
-
-
-class ConsumerIdPath(BaseModel):
-    id: str = Field(min_length=1)
-
-
-class ConsumerResponse(BaseModel):
-    status: str
-    message: str
-    id: str
 
 
 def get_by_id(path: ConsumerIdPath) -> ConsumerResponse:

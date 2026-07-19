@@ -3,7 +3,7 @@
 from fastapi import APIRouter
 
 from consumer.controllers import authentication as auth_controller
-from consumer.controllers.authentication import (
+from pylib.models.consumer.authentication import (
     AuthResponse,
     ForgotPasswordRequest,
     LoginRequest,

@@ -3,7 +3,7 @@
 from fastapi import APIRouter
 
 from consumer.controllers import discovery as discovery_controller
-from consumer.controllers.discovery import SearchRequest, SearchResponse
+from pylib.models.consumer.discovery import SearchRequest, SearchResponse
 
 router = APIRouter(prefix="/discovery", tags=["discovery"])
 
