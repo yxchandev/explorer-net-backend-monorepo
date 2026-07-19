@@ -2,8 +2,8 @@
 
 from fastapi import APIRouter
 
-from api.controllers import consumer as consumer_controller
-from api.controllers.consumer import ConsumerIdPath, ConsumerResponse
+from consumer.controllers import consumer as consumer_controller
+from consumer.controllers.consumer import ConsumerIdPath, ConsumerResponse
 
 router = APIRouter(prefix="/consumer", tags=["consumer"])
 

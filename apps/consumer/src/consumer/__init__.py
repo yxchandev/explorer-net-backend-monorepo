@@ -1,0 +1,1 @@
+"""Consumer FastAPI application package."""

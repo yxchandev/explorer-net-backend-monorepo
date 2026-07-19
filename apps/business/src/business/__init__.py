@@ -1,0 +1,1 @@
+"""Business FastAPI application package."""

@@ -2,8 +2,8 @@
 
 from fastapi import APIRouter
 
-from api.controllers import authentication as auth_controller
-from api.controllers.authentication import (
+from consumer.controllers import authentication as auth_controller
+from consumer.controllers.authentication import (
     AuthResponse,
     ForgotPasswordRequest,
     LoginRequest,

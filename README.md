@@ -1,11 +1,12 @@
 # Explorer Net Consumer Backend API
 
-uv workspace with a FastAPI app and a shared `pylib` package.
+uv workspace with FastAPI apps and a shared `pylib` package.
 
 ## Layout
 
 ```
-apps/api          # FastAPI application
+apps/consumer     # Consumer-facing FastAPI application
+apps/business     # Business-facing FastAPI application
 packages/pylib    # Shared library (workspace member)
 ```
 
@@ -15,24 +16,28 @@ packages/pylib    # Shared library (workspace member)
 uv sync
 ```
 
-## Run the API
+## Run
 
 ```powershell
-uv run api
-# or
-uv run uvicorn api.main:app --reload
+# Consumer (port 8000)
+uv run --package consumer consumer
+
+# Business (port 8001)
+uv run --package business business
 ```
 
-Then open http://127.0.0.1:8000/docs
-
-- `GET /health` — liveness check
-- `GET /hello?name=Ada` — uses `pylib.greet`
+Then open:
+- http://127.0.0.1:8000/docs (consumer)
+- http://127.0.0.1:8001/docs (business)
 
 ## Add dependencies
 
 ```powershell
-# API only
-uv add --package api httpx
+# Consumer only
+uv add --package consumer httpx
+
+# Business only
+uv add --package business httpx
 
 # Shared library
 uv add --package pylib pydantic

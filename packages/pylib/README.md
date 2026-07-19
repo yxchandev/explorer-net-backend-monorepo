@@ -1,7 +1,7 @@
 # pylib
 
-Shared Python library for workspace apps. Import from the FastAPI app (or any other member) via:
+Shared Python library for workspace apps. Import service modules from apps via:
 
 ```python
-from pylib import greet
+from pylib.services import authentication, consumer, discovery
 ```

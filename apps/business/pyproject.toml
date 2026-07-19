@@ -1,0 +1,28 @@
+[project]
+name = "business"
+version = "0.1.0"
+description = "Explorer Net business FastAPI backend"
+readme = "README.md"
+authors = [
+    { name = "Chan Yu Xiang", email = "gnomemage1990@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.139.2",
+    "httpx>=0.28.1",
+    "pydantic>=2.13.4",
+    "pylib",
+    "redis>=8.0.1",
+    "requests>=2.34.2",
+    "sqlalchemy>=2.0.51",
+]
+
+[project.scripts]
+business = "business.__main__:main"
+
+[build-system]
+requires = ["uv_build>=0.11.1,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.uv.sources]
+pylib = { workspace = true }

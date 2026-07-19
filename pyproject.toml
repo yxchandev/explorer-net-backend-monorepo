@@ -3,17 +3,20 @@ name = "explorer-net-consumer-backend-api"
 version = "0.1.0"
 requires-python = ">=3.14"
 dependencies = [
-    "api",
+    "business",
+    "consumer",
 ]
 
 [tool.uv.workspace]
 members = [
     "packages/pylib",
-    "apps/api",
+    "apps/consumer",
+    "apps/business",
 ]
 
 [tool.uv.sources]
-api = { workspace = true }
+business = { workspace = true }
+consumer = { workspace = true }
 
 [dependency-groups]
 dev = [

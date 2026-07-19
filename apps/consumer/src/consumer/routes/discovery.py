@@ -2,8 +2,8 @@
 
 from fastapi import APIRouter
 
-from api.controllers import discovery as discovery_controller
-from api.controllers.discovery import SearchRequest, SearchResponse
+from consumer.controllers import discovery as discovery_controller
+from consumer.controllers.discovery import SearchRequest, SearchResponse
 
 router = APIRouter(prefix="/discovery", tags=["discovery"])
 
