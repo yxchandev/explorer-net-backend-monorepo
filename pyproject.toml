@@ -1,0 +1,22 @@
+[project]
+name = "explorer-net-consumer-backend-api"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "api",
+]
+
+[tool.uv.workspace]
+members = [
+    "packages/pylib",
+    "apps/api",
+]
+
+[tool.uv.sources]
+api = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "black>=26.5.1",
+    "pylint>=4.0.6",
+]

@@ -1,0 +1,14 @@
+[project]
+name = "pylib"
+version = "0.1.0"
+description = "Shared Python library for Explorer Net workspace apps"
+readme = "README.md"
+authors = [
+    { name = "Chan Yu Xiang", email = "gnomemage1990@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.11.1,<0.12.0"]
+build-backend = "uv_build"
