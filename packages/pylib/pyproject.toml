@@ -7,7 +7,11 @@ authors = [
     { name = "Chan Yu Xiang", email = "gnomemage1990@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "asyncpg>=0.31.0",
+    "psycopg[binary]>=3.3.4",
+    "sqlalchemy[asyncio]>=2.0.51",
+]
 
 [build-system]
 requires = ["uv_build>=0.11.1,<0.12.0"]
