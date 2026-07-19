@@ -5,9 +5,9 @@ uv workspace with FastAPI apps and a shared `pylib` package.
 ## Layout
 
 ```
-apps/consumer     # Consumer-facing FastAPI application
-apps/business     # Business-facing FastAPI application
-packages/pylib    # Shared library (workspace member)
+apps/consumer/src     # Consumer FastAPI app (import: consumer.*)
+apps/business/src     # Business FastAPI app (import: business.*)
+packages/pylib/src    # Shared library (import: pylib.*)
 ```
 
 ## Setup
