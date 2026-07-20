@@ -5,9 +5,9 @@ from decimal import Decimal
 from sqlalchemy import Enum, ForeignKey, Integer, Numeric, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from pylib.models.enums import Currency
-from pylib.orm.base import TimestampedBase
-from pylib.orm.outlet import Outlet
+from packages.pylib.src.models.enums import Currency
+from packages.pylib.src.orm.base import TimestampedBase
+from packages.pylib.src.orm.outlet import Outlet
 
 
 class Menu(TimestampedBase):

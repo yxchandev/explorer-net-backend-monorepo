@@ -1,7 +1,7 @@
 # pylib
 
-Shared Python library for workspace apps. Import service modules from apps via:
+Shared Python library for workspace apps. Import via the monorepo path:
 
 ```python
-from pylib.services import authentication, consumer, discovery
+from packages.pylib.src.services import authentication, consumer, discovery
 ```

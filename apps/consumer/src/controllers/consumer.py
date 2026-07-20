@@ -1,9 +1,9 @@
 """Consumer profile controllers."""
 
-from pylib.models.consumer.consumer import ConsumerIdPath, ConsumerResponse
-from pylib.services import consumer as consumer_service
+from packages.pylib.src.models.consumer.consumer import ConsumerIdPath, ConsumerResponse
+from packages.pylib.src.services import consumer
 
 
 def get_by_id(path: ConsumerIdPath) -> ConsumerResponse:
-    result = consumer_service.get_by_id(consumer_id=path.id)
+    result = consumer.get_by_id(consumer_id=path.id)
     return ConsumerResponse.model_validate(result)

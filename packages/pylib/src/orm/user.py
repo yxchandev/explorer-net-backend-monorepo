@@ -3,7 +3,7 @@
 from sqlalchemy import Boolean, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
-from pylib.orm.base import TimestampedBase
+from packages.pylib.src.orm.base import TimestampedBase
 
 
 class User(TimestampedBase):

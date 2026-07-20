@@ -3,8 +3,8 @@
 from sqlalchemy import ForeignKey, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from pylib.orm.base import TimestampedBase
-from pylib.orm.outlet import Outlet
+from packages.pylib.src.orm.base import TimestampedBase
+from packages.pylib.src.orm.outlet import Outlet
 
 
 class Page(TimestampedBase):

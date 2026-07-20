@@ -5,9 +5,9 @@ from decimal import Decimal
 from sqlalchemy import Enum, ForeignKey, Integer, Numeric, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from pylib.models.enums import Country
-from pylib.orm.base import TimestampedBase
-from pylib.orm.client import Client
+from packages.pylib.src.models.enums import Country
+from packages.pylib.src.orm.base import TimestampedBase
+from packages.pylib.src.orm.client import Client
 
 
 class Outlet(TimestampedBase):

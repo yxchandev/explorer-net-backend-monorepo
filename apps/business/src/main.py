@@ -1,6 +1,16 @@
 from fastapi import FastAPI
 
+from apps.business.src.routes.client import router as client_router
+from apps.business.src.routes.menu import router as menu_router
+from apps.business.src.routes.outlet import router as outlet_router
+from apps.business.src.routes.page import router as page_router
+
 app = FastAPI(title="Explorer Net Business API", version="0.1.0")
+
+app.include_router(client_router)
+app.include_router(outlet_router)
+app.include_router(menu_router)
+app.include_router(page_router)
 
 
 @app.get("/health")

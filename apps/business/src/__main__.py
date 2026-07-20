@@ -2,7 +2,12 @@ import uvicorn
 
 
 def main() -> None:
-    uvicorn.run("business.main:app", host="127.0.0.1", port=8001, reload=True)
+    uvicorn.run(
+        "apps.business.src.main:app",
+        host="127.0.0.1",
+        port=8001,
+        reload=True,
+    )
 
 
 if __name__ == "__main__":

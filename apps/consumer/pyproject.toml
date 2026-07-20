@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 [project.scripts]
-consumer = "consumer.__main__:main"
+consumer = "apps.consumer.src.__main__:main"
 
 [build-system]
 requires = ["setuptools>=75"]

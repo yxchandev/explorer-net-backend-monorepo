@@ -2,7 +2,12 @@ import uvicorn
 
 
 def main() -> None:
-    uvicorn.run("consumer.main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run(
+        "apps.consumer.src.main:app",
+        host="127.0.0.1",
+        port=8000,
+        reload=True,
+    )
 
 
 if __name__ == "__main__":

@@ -2,8 +2,8 @@
 
 from fastapi import APIRouter
 
-from consumer.controllers import authentication as auth_controller
-from pylib.models.consumer.authentication import (
+from apps.consumer.src.controllers import authentication
+from packages.pylib.src.models.consumer.authentication import (
     AuthResponse,
     ForgotPasswordRequest,
     LoginRequest,
@@ -16,19 +16,19 @@ router = APIRouter(prefix="/authentication", tags=["authentication"])
 
 @router.post("/login", response_model=AuthResponse)
 def login(body: LoginRequest) -> AuthResponse:
-    return auth_controller.login(body)
+    return authentication.login(body)
 
 
 @router.post("/register", response_model=AuthResponse)
 def register(body: RegisterRequest) -> AuthResponse:
-    return auth_controller.register(body)
+    return authentication.register(body)
 
 
 @router.post("/forgotpassword", response_model=AuthResponse)
 def forgot_password(body: ForgotPasswordRequest) -> AuthResponse:
-    return auth_controller.forgot_password(body)
+    return authentication.forgot_password(body)
 
 
 @router.post("/resetpassword", response_model=AuthResponse)
 def reset_password(body: ResetPasswordRequest) -> AuthResponse:
-    return auth_controller.reset_password(body)
+    return authentication.reset_password(body)

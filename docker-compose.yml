@@ -17,20 +17,39 @@ services:
       timeout: 5s
       retries: 10
 
-  redis:
-    image: redis:7-alpine
-    container_name: explorer-net-redis
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: explorer-net-redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   healthcheck:
+  #     test: ["CMD", "redis-cli", "ping"]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 10
+
+  # mongo:
+  #   image: mongo:7
+  #   container_name: explorer-net-mongo
+  #   restart: unless-stopped
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: explorer
+  #     MONGO_INITDB_ROOT_PASSWORD: explorer
+  #     MONGO_INITDB_DATABASE: explorer_net
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo_data:/data/db
+  #   healthcheck:
+  #     test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 10
 
 volumes:
   postgres_data:
-  redis_data:
+  # redis_data:
+  # mongo_data:
