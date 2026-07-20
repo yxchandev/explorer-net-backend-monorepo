@@ -1,0 +1,2 @@
+-- Seed data for Explorer Net database
+-- Add INSERT statements below
