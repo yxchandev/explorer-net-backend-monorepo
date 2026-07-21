@@ -4,11 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from sqlalchemy import select
-
 from packages.pylib.src.orm.client import Client
-from packages.pylib.src.utils.db import session_scope
-from packages.pylib.src.utils.pagination import lazyload
+from packages.pylib.src.query import client as client_query
 
 
 def _serialize_client(client: Client) -> dict[str, Any]:
@@ -27,35 +24,27 @@ def _serialize_client(client: Client) -> dict[str, Any]:
 
 
 def lazyload_clients(page: int, page_size: int) -> dict[str, Any]:
-    stmt = select(Client).order_by(Client.id)
-    with session_scope() as session:
-        return lazyload(session, stmt, page, page_size, _serialize_client)
+    result = client_query.lazyload_clients(page, page_size)
+    return {
+        **result,
+        "items": [_serialize_client(client) for client in result["items"]],
+    }
 
 
 def get_by_id(client_id: int) -> dict[str, Any] | None:
-    with session_scope() as session:
-        client = session.get(Client, client_id)
-        if client is None:
-            return None
-        return _serialize_client(client)
+    client = client_query.get_by_id(client_id)
+    if client is None:
+        return None
+    return _serialize_client(client)
 
 
 def create(data: dict[str, Any]) -> dict[str, Any]:
-    with session_scope() as session:
-        client = Client(**data)
-        session.add(client)
-        session.flush()
-        session.refresh(client)
-        return _serialize_client(client)
+    client = client_query.create(data)
+    return _serialize_client(client)
 
 
 def update(client_id: int, data: dict[str, Any]) -> dict[str, Any] | None:
-    with session_scope() as session:
-        client = session.get(Client, client_id)
-        if client is None:
-            return None
-        for key, value in data.items():
-            setattr(client, key, value)
-        session.flush()
-        session.refresh(client)
-        return _serialize_client(client)
+    client = client_query.update(client_id, data)
+    if client is None:
+        return None
+    return _serialize_client(client)

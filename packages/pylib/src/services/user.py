@@ -4,11 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from sqlalchemy import select
-
 from packages.pylib.src.orm.user import User
-from packages.pylib.src.utils.db import session_scope
-from packages.pylib.src.utils.pagination import lazyload
+from packages.pylib.src.query import user as user_query
 
 
 def _serialize_user(user: User) -> dict[str, Any]:
@@ -28,35 +25,27 @@ def _serialize_user(user: User) -> dict[str, Any]:
 
 
 def lazyload_users(page: int, page_size: int) -> dict[str, Any]:
-    stmt = select(User).order_by(User.id)
-    with session_scope() as session:
-        return lazyload(session, stmt, page, page_size, _serialize_user)
+    result = user_query.lazyload_users(page, page_size)
+    return {
+        **result,
+        "items": [_serialize_user(user) for user in result["items"]],
+    }
 
 
 def get_by_id(user_id: int) -> dict[str, Any] | None:
-    with session_scope() as session:
-        user = session.get(User, user_id)
-        if user is None:
-            return None
-        return _serialize_user(user)
+    user = user_query.get_by_id(user_id)
+    if user is None:
+        return None
+    return _serialize_user(user)
 
 
 def create(data: dict[str, Any]) -> dict[str, Any]:
-    with session_scope() as session:
-        user = User(**data)
-        session.add(user)
-        session.flush()
-        session.refresh(user)
-        return _serialize_user(user)
+    user = user_query.create(data)
+    return _serialize_user(user)
 
 
 def update(user_id: int, data: dict[str, Any]) -> dict[str, Any] | None:
-    with session_scope() as session:
-        user = session.get(User, user_id)
-        if user is None:
-            return None
-        for key, value in data.items():
-            setattr(user, key, value)
-        session.flush()
-        session.refresh(user)
-        return _serialize_user(user)
+    user = user_query.update(user_id, data)
+    if user is None:
+        return None
+    return _serialize_user(user)

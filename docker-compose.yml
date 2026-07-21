@@ -1,14 +1,16 @@
+name: explorer-net
+version: '1.0.0'
 services:
   postgres:
     image: postgres:16-alpine
     container_name: explorer-net-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: explorer
-      POSTGRES_PASSWORD: explorer
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
       POSTGRES_DB: explorer_net
     ports:
-      - "5432:5432"
+      - "25432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

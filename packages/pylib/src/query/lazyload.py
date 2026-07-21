@@ -16,7 +16,7 @@ def lazyload(
     stmt: Select[tuple[T]],
     page: int,
     page_size: int,
-    mapper: Callable[[T], dict[str, Any]],
+    mapper: Callable[[T], dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Paginate a SQLAlchemy select statement."""
     count_stmt = select(func.count()).select_from(stmt.subquery())
@@ -24,8 +24,9 @@ def lazyload(
     rows = session.scalars(
         stmt.offset((page - 1) * page_size).limit(page_size)
     ).all()
+    items = [mapper(row) for row in rows] if mapper else list(rows)
     return {
-        "items": [mapper(row) for row in rows],
+        "items": items,
         "total": total,
         "page": page,
         "page_size": page_size,

@@ -4,11 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from sqlalchemy import select
-
 from packages.pylib.src.orm.menu import Menu
-from packages.pylib.src.utils.db import session_scope
-from packages.pylib.src.utils.pagination import lazyload
+from packages.pylib.src.query import menu as menu_query
 
 
 def _serialize_menu(menu: Menu) -> dict[str, Any]:
@@ -25,35 +22,27 @@ def _serialize_menu(menu: Menu) -> dict[str, Any]:
 
 
 def lazyload_menus(page: int, page_size: int) -> dict[str, Any]:
-    stmt = select(Menu).order_by(Menu.id)
-    with session_scope() as session:
-        return lazyload(session, stmt, page, page_size, _serialize_menu)
+    result = menu_query.lazyload_menus(page, page_size)
+    return {
+        **result,
+        "items": [_serialize_menu(menu) for menu in result["items"]],
+    }
 
 
 def get_by_id(menu_id: int) -> dict[str, Any] | None:
-    with session_scope() as session:
-        menu = session.get(Menu, menu_id)
-        if menu is None:
-            return None
-        return _serialize_menu(menu)
+    menu = menu_query.get_by_id(menu_id)
+    if menu is None:
+        return None
+    return _serialize_menu(menu)
 
 
 def create(data: dict[str, Any]) -> dict[str, Any]:
-    with session_scope() as session:
-        menu = Menu(**data)
-        session.add(menu)
-        session.flush()
-        session.refresh(menu)
-        return _serialize_menu(menu)
+    menu = menu_query.create(data)
+    return _serialize_menu(menu)
 
 
 def update(menu_id: int, data: dict[str, Any]) -> dict[str, Any] | None:
-    with session_scope() as session:
-        menu = session.get(Menu, menu_id)
-        if menu is None:
-            return None
-        for key, value in data.items():
-            setattr(menu, key, value)
-        session.flush()
-        session.refresh(menu)
-        return _serialize_menu(menu)
+    menu = menu_query.update(menu_id, data)
+    if menu is None:
+        return None
+    return _serialize_menu(menu)
