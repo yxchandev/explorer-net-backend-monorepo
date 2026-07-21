@@ -1,4 +1,9 @@
+from pathlib import Path
+
 import uvicorn
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 
 def main() -> None:
